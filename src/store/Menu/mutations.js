@@ -6,7 +6,6 @@ export default {
         state.visible = false;
     },
     toggle (state) {
-        console.log("toggled");
         state.visible = !state.visible;
     }
 };

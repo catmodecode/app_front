@@ -43,7 +43,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
-      devtool: 'source-map',
+      devtool: "source-map",
 
       // transpile: false,
 
@@ -79,7 +79,26 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
-      config: {},
+      config: {
+        notify: {
+          type: "positive",
+          position: "top-right",
+          textColor: "",
+          /* look at QuasarConfOptions from the API card */
+        },
+        brand: {
+          primary: "#19344f",
+          secondary: "#20665f",
+          accent: "#9C27B0",
+
+          dark: "#1d1d1d",
+
+          positive: "#2c5435",
+          negative: "#852d37",
+          info: "#4e8d99",
+          warning: "#9c874e",
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -92,7 +111,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ["Dialog", "Notify"],
     },
 
     // animations: 'all', // --- includes all animations

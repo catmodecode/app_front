@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default {
     setDarkMode({ commit }) {
         commit("setDarkMode");
@@ -7,5 +9,5 @@ export default {
     },
     toggleMode({ commit }) {
         commit("toggleMode");
-    }
+    },
 };
