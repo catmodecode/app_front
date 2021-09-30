@@ -4,8 +4,7 @@ import mutations from "./mutations";
 export default {
   namespaced: true,
   state: () => ({
-    darkMode: true,
-    loading: false,
+    sstate: 0,
   }),
   mutations,
   actions,

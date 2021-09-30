@@ -1,10 +1,26 @@
 class Token {
   constructor() {
+    this.setTokens(null, null, null);
+  }
+
+  loadFromStorage() {
     let accessToken = localStorage.getItem("access_token");
     let refreshToken = localStorage.getItem("refresh_token");
     let accessExpired = localStorage.getItem("access_expired");
 
     this.setTokens(accessToken, refreshToken, accessExpired);
+  }
+
+  setToStorage(access, refresh, expire) {
+    localStorage.setItem("access_token", access);
+    localStorage.setItem("refresh_token", refresh);
+    localStorage.setItem("access_expired", expire);
+  }
+
+  clearStorage() {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("access_expired");
   }
 
   setTokens(access, refresh, expire) {
@@ -24,16 +40,23 @@ class Token {
       this.refreshToken = refresh;
       this.accessExpired = expire;
     }
-    localStorage.setItem("access_token", access);
-    localStorage.setItem("refresh_token", refresh);
-    localStorage.setItem("access_expired", expire);
   }
 
   clear() {
     this.setTokens(null, null, null);
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("access_expired");
+  }
+
+  logged() {
+    return (
+      this.accessToken != null &&
+      this.refreshToken != null &&
+      this.accessExpired != null
+    );
+  }
+
+  expired() {
+    console.log(new Date(this.accessExpired), new Date());
+    return new Date(this.accessExpired) > new Date();
   }
 }
 

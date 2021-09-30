@@ -83,6 +83,8 @@ export default {
             this.$store.dispatch('auth/authentificate', {
                 email: this.login,
                 password: this.password
+            }).then(() => {
+                this.closePopup()
             })
         }
     },

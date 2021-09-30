@@ -16,7 +16,7 @@ module.exports = configure(function (ctx) {
     supportTS: false,
 
     // https://v2.quasar.dev/quasar-cli/prefetch-feature
-    // preFetch: true,
+    preFetch: true,
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
@@ -125,7 +125,7 @@ module.exports = configure(function (ctx) {
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
 
-      prodPort: 3000, // The default port that the production server should use
+      prodPort: 443, // The default port that the production server should use
       // (gets superseded if process.env.PORT is specified at runtime)
 
       maxAge: 1000 * 60 * 60 * 24 * 30,

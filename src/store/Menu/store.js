@@ -3,9 +3,9 @@ import mutations from './mutations'
 
 export default {
     namespaced: true,
-    state: {
+    state: () => ({
         visible: false
-    },
+    }),
     mutations,
     actions
 };
