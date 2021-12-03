@@ -20,7 +20,8 @@ export default defineComponent({
     }
   },
   mounted: function() {
-    setTimeout(() => this.splashShow = false, 1500)
+    setTimeout(() => this.splashShow = false, 500)
+    this.$store.dispatch('auth/restoreAuth');
   }
 })
 </script>
