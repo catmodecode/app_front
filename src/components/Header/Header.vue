@@ -8,18 +8,25 @@
       <q-card class="dark-back no-box-shadow q-pa-sm">
         <q-card-section class="row">
           <div class="row">
-            <q-select class="q-ma-sm" hide-dropdown-icon use-input input-debounce="0" label="Поиск...">
+            <q-select class="q-ma-sm" hide-dropdown-icon v-model="search" use-input input-debounce="0" label="Поиск...">
               <template v-slot:append>
-                <q-btn icon="search" dense ripple="false" />
+                <q-btn icon="search" dense />
               </template>
             </q-select>
           </div>
-          <q-btn-group class="column">
-            <q-btn v-if="!logged" color="primary" icon="login" label="Войти" width="130px" height="45px" @click="loginClick"/>
-            <template v-else>
-            <q-btn color="primary" align="right" icon-right="man" label="Профиль" width="130px" height="45px" @click="$router.push('profile')" />
-            <q-btn color="primary" align="right" icon-right="meeting_room" label="Выход" width="130px" height="45px" @click="logout" />
-            </template>
+          <q-btn v-if="!logged" class="profile-button q-ma-sm" color="primary" icon="login" label="Войти" width="130px" height="45px" @click="loginClick"/>
+          <q-btn-group class="profile-button q-ma-sm" v-else spread >
+            <q-btn color="primary" icon="man" label="cat">
+              <q-menu>
+                <q-list class="profile-button">
+                  <q-item v-for="menuItem in menu" :key="menuItem" clickable v-close-popup>
+                    <q-item-section>
+                      <div @click="menuItem.callback()">{{ menuItem.caption }}</div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
           </q-btn-group>
           <q-dialog v-model="loginPrompt">
             <q-card style="min-width: 350px">
@@ -69,6 +76,8 @@ export default defineComponent({
       email: null,
       password: null,
       isPwd: true,
+      menu: [],
+      search: null,
     }
   },
   computed: {
@@ -79,7 +88,6 @@ export default defineComponent({
   methods: {
     loginClick: function() {
       this.loginPrompt = true;
-      console.log(this.logged);
     },
     login: function() {
       this.$store.dispatch('auth/login', {email: this.email, password: this.password});
@@ -89,6 +97,18 @@ export default defineComponent({
     logout: function() {
       this.$store.dispatch('auth/logout');
     }
+  },
+  mounted: function() {
+    this.menu = [
+      {
+        caption: 'Профиль',
+        callback: () => this.$router.push('profile')
+      },
+      {
+        caption: 'Выход',
+        callback: () => this.logout()
+      },
+    ]
   }
 })
 </script>
@@ -116,5 +136,9 @@ export default defineComponent({
 
 .row2 :nth-child(1n) {
   margin: 5px;
+}
+
+.profile-button {
+  width: 180px;
 }
 </style>

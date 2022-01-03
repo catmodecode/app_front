@@ -4,14 +4,19 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue'), name: 'index' },
-      { path: 'profile', component: () => import('pages/Profile/Profile.vue'), name: 'profile' }
+      {
+        path: 'profile',
+        component: () => import('pages/Profile/Profile.vue'),
+        name: 'profile',
+        meta: { requiresAuth: true },
+      }
     ]
   },
   {
     path: '/admin',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
-      {path: '', component: () => import('pages/Index.vue'), name: 'admin.index' }
+      { path: '', component: () => import('pages/Index.vue'), name: 'admin.index' }
     ]
   },
 

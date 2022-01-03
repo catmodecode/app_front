@@ -21,7 +21,7 @@ export default defineComponent({
   },
   mounted: function() {
     setTimeout(() => this.splashShow = false, 500)
-    this.$store.dispatch('auth/restoreAuth');
+    this.$store.dispatch('auth/restoreAuth')
   }
 })
 </script>

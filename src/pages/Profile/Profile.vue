@@ -91,7 +91,7 @@ export default defineComponent({
                 phone: this.phone,
                 country: this.country,
                 city: this.city,
-            }).then(r => console.log(r))
+            })
         },
         onReset: function () {
         },

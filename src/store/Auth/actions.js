@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Cookies, Notify } from 'quasar'
-import { route } from "quasar/wrappers";
 
 export function login (context, { email, password }) {
   axios.post('/api/auth/login', {
@@ -43,7 +42,6 @@ export function logout (context) {
     token: null,
     refreshToken: null
   })
-  console.log(route);
 }
 
 function updateTokens (context, result) {
@@ -52,7 +50,7 @@ function updateTokens (context, result) {
     refreshToken: result.data.refresh
   })
 
-  axios.defaults.headers.common['Authorization'] = result.data.access;
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + result.data.access;
   Cookies.set('refresh', result.data.refresh)
   const timeOut = (result.data.access_expired * 1000) - new Date();
 
