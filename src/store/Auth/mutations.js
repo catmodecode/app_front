@@ -1,9 +1,10 @@
-export function set (state, { token, refreshToken }) {
+export function set (state, { token, refreshToken, accessExpired }) {
   state.token = token
   state.refreshToken = refreshToken
   if (token == null) {
     return
   }
+  state.accessExpired = accessExpired * 1000
   const data = parseJwt(token)
   state.userId = data.user_id
   state.groups = data.groups

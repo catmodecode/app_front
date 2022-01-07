@@ -30,6 +30,7 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     next()
   })
+  
   Router.beforeEach(authMiddleware)
   Router.beforeEach(adminMiddleware)
 

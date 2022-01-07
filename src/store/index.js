@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
+import createMultiTabState from 'vuex-multi-tab-state';
 
 import profile from './Profile'
 import auth from './Auth'
@@ -13,17 +14,27 @@ import auth from './Auth'
  * with the Store instance.
  */
 
+const Store = createStore({
+  modules: {
+    profile,
+    auth,
+  },
+
+  // enable strict mode (adds overhead!)
+  // for dev mode and --debug builds only
+  strict: process.env.DEBUGGING,
+  plugins: [
+    createMultiTabState({
+      key: 'app',
+      statesPaths: ['auth']
+    }),
+  ],
+})
+
 export default store(function (/* { ssrContext } */) {
-  const Store = createStore({
-    modules: {
-      profile,
-      auth,
-    },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
-    strict: process.env.DEBUGGING
-  })
-
   return Store
 })
+
+export {
+  Store
+}

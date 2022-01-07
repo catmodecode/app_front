@@ -3,12 +3,12 @@
     <q-toolbar>
       <q-img src="~assets/logo.png" :ratio="1/1" class="header-logo float-left" @click="$router.push({name: 'index'})" />
       <q-toolbar-title class="no-box-shadow" @click="$router.push({name: 'index'})">
-        AR Eagle
+        {{ $t('common.title') }}
       </q-toolbar-title>
       <q-card class="dark-back no-box-shadow q-pa-sm">
         <q-card-section class="row">
           <div class="row">
-            <q-select class="q-ma-sm" hide-dropdown-icon v-model="search" use-input input-debounce="0" label="Поиск...">
+            <q-select class="q-ma-sm" hide-dropdown-icon v-model="search" use-input input-debounce="0" :label="$t('common.search')">
               <template v-slot:append>
                 <q-btn icon="search" dense />
               </template>
@@ -90,6 +90,7 @@ export default defineComponent({
       this.loginPrompt = true;
     },
     login: function() {
+      this.$store.dispatch('auth/login', {email: this.email, password: this.password});
       this.$store.dispatch('auth/login', {email: this.email, password: this.password});
       this.email = null
       this.password = null
